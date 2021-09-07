@@ -1,0 +1,6 @@
+### get the status
+
+
+GET http://localhost:1337/status HTTP/1.1
+Accept: application/json
+User-Agent: rest-client-vs-code
