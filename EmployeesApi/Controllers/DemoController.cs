@@ -24,5 +24,39 @@ namespace EmployeesApi.Controllers
             return Ok($"Getting orders for {year}-{month}-{day}");
         }
 
+        [HttpGet("/orders")]  // Query strings only make sense on "queries", which are GET requests on collections
+        // This means if you are using query strings on a post or something, you should probably rethink your design.
+        public ActionResult GetOrders([FromQuery(Name = "sold-by")] string soldBy = "all")
+        {
+            return Ok($"Getting you all the orders sold by {soldBy}");
+        }
+
+
+        [HttpGet("/workers")]
+        public ActionResult GetWorkers(string department = "all")
+        {
+            return Ok($"Getting workers in the department {department}");
+        }
+
+        [HttpGet("whoami")]
+        public ActionResult GetUserAgent([FromHeader(Name = "User-Agent")] string userAgent)
+        {
+            return Ok($"You are telling me you are running {userAgent}");
+        }
+
+        [HttpPost("orders")]
+        public ActionResult PlaceAnOrder([FromBody] PostOrderRequest order)
+        {
+            return Ok($"Placing an order for {order.For} for {order.Items.Count} items.");
+        }
+
     }
+
+
+    public class PostOrderRequest
+    {
+        public string For { get; set; }
+        public List<int> Items { get; set; }
+    }
+
 }

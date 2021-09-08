@@ -2,3 +2,22 @@
 
 GET http://localhost:1337/products/32 HTTP/1.1
 Accept: application/json
+
+
+GET http://localhost:1377/workers HTTP/1.1
+Accept: application/json
+
+
+
+### Place an order
+
+
+### Place an Order
+POST http://localhost:1337/orders HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+"for": "Bob Smith",
+"items": [1,2,3,4]
+}

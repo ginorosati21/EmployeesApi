@@ -27,6 +27,14 @@ namespace EmployeesApi.Controllers
     {
         public string Message { get; set; }
         public DateTime WhenChecked { get; set; }
+        public StandbyDeveloperInfo StandByDeveloper { get; set; }
+    }
+
+
+    public class StandbyDeveloperInfo
+    {
+        public string Name { get; set; }
+        public string EmailAddress { get; set; }
     }
 
 }
