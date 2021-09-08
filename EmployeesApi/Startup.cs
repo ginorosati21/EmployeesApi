@@ -1,3 +1,4 @@
+using EmployeesApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,11 @@ namespace EmployeesApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddHttpClient<ApiOnCallService>(options =>
+            {
+                options.BaseAddress = new Uri(Configuration["nodeApi"]);
+            });
+            services.AddTransient<IProvideStatus, NodeJsDeveloperOnCallStatusProvider>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

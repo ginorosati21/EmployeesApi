@@ -8,15 +8,21 @@ namespace EmployeesApi.Controllers
 {
     public class StatusController : ControllerBase
     {
+        private readonly IProvideStatus _statusProvider;
+
+        public StatusController(IProvideStatus statusProvider)
+        {
+            _statusProvider = statusProvider;
+        }
+
+
+
         // GET / status -> 200
         [HttpGet("status")]
-        public ActionResult GetTheStatus()
+        public async Task<ActionResult> GetTheStatus()
         {
-            var response = new GetStatusResponse
-            {
-                Message = "The server is running great!",
-                WhenChecked = DateTime.Now
-            };
+            // Write The Code You Wish You Had
+            GetStatusResponse response = await _statusProvider.GetCurrentStatusAsync();
             return Ok(response);
         }
 
