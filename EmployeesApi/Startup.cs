@@ -1,7 +1,9 @@
+using EmployeesApi.Data;
 using EmployeesApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +29,10 @@ namespace EmployeesApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<EmployeesDataContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("employees"));
+            });
             services.AddFeatureManagement(Configuration.GetSection("flags"));
             services.AddHttpClient<ApiOnCallService>(options =>
             {
